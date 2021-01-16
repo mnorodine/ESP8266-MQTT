@@ -16,6 +16,8 @@ unsigned int MQTT_PORT      = 1883;
 const char *MQTT_TOPIC      ="DIUEIL/JMPQ/Temperature";
 
 unsigned long  tps= 0;
+unsigned long  MessageID = 0;
+
 
 WiFiClient espClient;
 PubSubClient MQTTclient(espClient);
