@@ -107,10 +107,14 @@ void MQTTPublish(String topic, float t)
 {
   char top[topic.length()+1];
   topic.toCharArray(top,topic.length()+1);
-  char t_char[100];
-  String t_str = "{'Temperature' : "+ String(t)+ "}";
+  char t_char[64];
+
+  MessageID ++;
+  String t_str = "{{'ID':"+String(MessageID)+"},{'Temperature':"+ String(t)+ "}}";
   t_str.toCharArray(t_char, t_str.length() + 1);
   MQTTclient.publish(top,t_char);
+  Serial.println();
+  Serial.print(t_str);
   if (digitalRead(LED_BUILTIN)) digitalWrite(LED_BUILTIN, LOW);
   else digitalWrite(LED_BUILTIN, HIGH);
 }
@@ -127,7 +131,5 @@ void loop()
      tps=millis();
      float temp = 25 + random(8);
      MQTTPublish("DIUEIL/JMPQ/Temperature",temp);
-     Serial.print("qqchose : ");
-     Serial.println(temp); 
    }
 }
